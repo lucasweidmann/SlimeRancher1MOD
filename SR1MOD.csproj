@@ -35,8 +35,9 @@
     <Reference Include="0Harmony">
       <HintPath>..\..\Program Files\Steam\steamapps\common\Slime Rancher\SRML\Libs\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp_old-publicized">
-      <HintPath>C:\Users\Administrator\Assembly-CSharp_old-publicized.dll</HintPath>
+    <Reference Include="Assembly-CSharp_old-publicized, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MODS\Assembly-CSharp_old-publicized.dll</HintPath>
     </Reference>
     <Reference Include="AssetsLib">
       <HintPath>..\..\Program Files\Steam\steamapps\common\Slime Rancher\SRML\Mods\AssetsLib.dll</HintPath>
@@ -63,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GordoSnaring.cs" />
     <Compile Include="main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,8 +72,13 @@
     <EmbeddedResource Include="modinfo.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="KALI1.jpg" />
-    <EmbeddedResource Include="KALI2.png" />
+    <EmbeddedResource Include="EmeraldSlime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmeraldPlort.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmeraldGordo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

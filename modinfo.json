@@ -1,7 +1,7 @@
 {
-  "id": "myfirstmod",
-  "name": "My First Mod",
+  "id": "oreSlimesMod",
+  "name": "Ore Slimes Mod",
   "author": "clark",
-  "description": "This is the first mod I have ever made!",
+  "description": "A mod that adds slimes based on ores.",
   "version": "1.0"
 }
