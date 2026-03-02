@@ -19,6 +19,9 @@ namespace EmeraldSlime
         public static readonly Identifiable.Id EMERALD_BRINE;
         public static readonly Identifiable.Id OBSIDIAN_CHICK;
         public static readonly Identifiable.Id OBSIDIAN_HEN;
+        public static readonly Identifiable.Id RUBY_SLIME;
+        public static readonly Identifiable.Id RUBY_PLORT;
+        public static readonly Identifiable.Id RUBY_GORDO;
 
         public static readonly PediaDirector.Id PEDIA_EMERALD_SLIME;
         public static readonly PediaDirector.Id PEDIA_RUSTY_CARROT;
@@ -26,6 +29,7 @@ namespace EmeraldSlime
         public static readonly PediaDirector.Id PEDIA_OBSIDIAN_CHICK;
         public static readonly PediaDirector.Id PEDIA_OBSIDIAN_HEN;
         public static readonly PediaDirector.Id PEDIA_ORE_ZONE;
+        public static readonly PediaDirector.Id PEDIA_RUBY_SLIME;
 
         public static readonly SpawnResource.Id RUSTY_CARROT_FARM;
         public static readonly SpawnResource.Id RUSTY_CARROT_FARM_DLX;
@@ -46,7 +50,9 @@ namespace EmeraldSlime
             TranslationPatcher.AddUITranslation("t.loading.oreslimes.tip4", "Obsidian Hens are hard to see in the dark.");
 
             PlortCreation.PlortPreLoad(Ids.EMERALD_PLORT, "Emerald Plort", false);
-            SpawnCreation.CreateSingleZoneSpawner(Ids.EMERALD_SLIME, ZoneDirector.Zone.DESERT, 0.02f);
+            PlortCreation.PlortPreLoad(Ids.RUBY_PLORT, "Ruby Plort", false);
+            SpawnCreation.CreateSingleZoneSpawner(Ids.EMERALD_SLIME, ZoneDirector.Zone.REEF, 0.02f);
+            SpawnCreation.CreateSingleZoneSpawner(Ids.RUBY_SLIME, ZoneDirector.Zone.REEF, 0.02f);
 
             List<Identifiable.Id> slimesToLargoWith = new List<Identifiable.Id>
             {
@@ -87,7 +93,21 @@ namespace EmeraldSlime
                         baseName + "_EMERALD_LARGO"
                     )
                 );
+                largoIds1.Add(
+                    IdentifiableRegistry.CreateIdentifiableId(
+                        EnumPatcher.GetFirstFreeValue<Identifiable.Id>(),
+                        "RUBY_" + baseName + "_LARGO"
+    )
+);
+
+                largoIds2.Add(
+                    IdentifiableRegistry.CreateIdentifiableId(
+                        EnumPatcher.GetFirstFreeValue<Identifiable.Id>(),
+                        baseName + "_RUBY_LARGO"
+                    )
+                );
             }
+
             HarmonyInstance.PatchAll();
         }
 
@@ -114,6 +134,15 @@ namespace EmeraldSlime
                 new Color32(18, 95, 45, 255)
             );
 
+            var rubyPlortObj = PlortCreation.CreatePlort(
+                "Ruby Plort",
+                Ids.RUBY_PLORT,
+                Vacuumable.Size.NORMAL,
+                new Color32(120, 0, 15, 255),
+                new Color32(255, 40, 60, 255),
+                new Color32(90, 0, 10, 255)
+            );
+
             PlortCreation.PlortLoad(
                 Ids.EMERALD_PLORT,
                 600f,
@@ -126,14 +155,26 @@ namespace EmeraldSlime
                 false
             );
 
+            PlortCreation.PlortLoad(
+                Ids.RUBY_PLORT,
+                700f,
+                50f,
+                rubyPlortObj,
+                TextureUtils.LoadImage("RubyPlort.png").CreateSprite(),
+                new Color32(255, 60, 80, 255),
+                true,
+                true,
+                false
+            );
+
             var emeraldSlime = SlimeCreation.SlimeBaseCreate(
                 Ids.EMERALD_SLIME,
                 "Emerald Slime",
                 "Emerald Slime",
                 "Emerald Slime",
                 "Emerald Slime",
-                Identifiable.Id.CRYSTAL_SLIME,
-                Identifiable.Id.CRYSTAL_SLIME,
+                Identifiable.Id.MOSAIC_SLIME,
+                Identifiable.Id.MOSAIC_SLIME,
                 Identifiable.Id.CRYSTAL_SLIME,
                 Identifiable.Id.CRYSTAL_SLIME,
                 SlimeEat.FoodGroup.GINGER,
@@ -147,23 +188,63 @@ namespace EmeraldSlime
                 false,
                 0f,
                 0.1f,
-                new Color32(120, 255, 170, 255),
-                new Color32(45, 200, 120, 255),
-                new Color32(10, 95, 55, 255),
-                new Color32(190, 255, 220, 255),
-                new Color32(8, 70, 40, 255),
-                new Color32(5, 45, 28, 255),
-                new Color32(2, 25, 15, 255),
-                new Color32(210, 255, 230, 255),
-                new Color32(20, 120, 70, 255),
-                new Color32(5, 20, 10, 255),
-                new Color32(170, 255, 210, 255),
-                new Color32(45, 200, 120, 255),
-                new Color32(10, 95, 55, 255),
-                new Color32(90, 255, 170, 255)
+                new Color32(210, 10, 25, 255),
+                new Color32(170, 0, 15, 255),
+                new Color32(70, 0, 8, 255),
+                new Color32(255, 160, 170, 255),
+                new Color32(45, 0, 6, 255),
+                new Color32(15, 0, 3, 255),
+                new Color32(20, 20, 20, 255),
+                new Color32(0, 0, 0, 255),
+                new Color32(0, 0, 0, 255),
+                new Color32(255, 70, 80, 255),
+                new Color32(200, 0, 20, 255),
+                new Color32(90, 0, 10, 255),
+                new Color32(150, 0, 20, 255),
+                new Color32(220, 20, 30, 255)
             );
 
             SlimeCreation.LoadSlime(emeraldSlime);
+
+            var rubySlime = SlimeCreation.SlimeBaseCreate(
+                Ids.RUBY_SLIME,
+                "Ruby Slime",
+                "Ruby Slime",
+                "Ruby Slime",
+                "Ruby Slime",
+                Identifiable.Id.PINK_SLIME,
+                Identifiable.Id.MOSAIC_SLIME,
+                Identifiable.Id.MOSAIC_SLIME,
+                Identifiable.Id.MOSAIC_SLIME,
+                SlimeEat.FoodGroup.MEAT,
+                Identifiable.Id.HEN,
+                Identifiable.Id.STONY_HEN,
+                Identifiable.Id.BOMB_BALL_TOY,
+                Ids.RUBY_PLORT,
+                false,
+                TextureUtils.LoadImage("RubySlime.png").CreateSprite(),
+                Vacuumable.Size.NORMAL,
+                false,
+                0f,
+                1.25f,
+                new Color32(210, 10, 25, 255),
+                new Color32(170, 0, 15, 255),
+                new Color32(70, 0, 8, 255),
+                new Color32(255, 240, 240, 255),
+                new Color32(230, 230, 230, 255),
+                new Color32(200, 200, 200, 255),
+                new Color32(255, 255, 255, 255),
+                new Color32(255, 255, 255, 255),
+                new Color32(255, 255, 255, 255),
+                new Color32(255, 70, 80, 255),
+                new Color32(200, 0, 20, 255),
+                new Color32(90, 0, 10, 255),
+                new Color32(150, 0, 20, 255),
+                new Color32(220, 20, 30, 255)
+            );
+            rubySlime.Item1.AppearancesDefault[0].Structures[1].DefaultMaterials[0] = IdChange.GetSlimeDefinitionFromId(Identifiable.Id.MOSAIC_SLIME).AppearancesDefault[0].Structures[1].DefaultMaterials[0];
+
+            SlimeCreation.LoadSlime(rubySlime);
 
             var emeraldGordo = GordoCreation.CreateGordoWithIcon(
                 Ids.EMERALD_GORDO,
@@ -180,6 +261,22 @@ namespace EmeraldSlime
             );
 
             SlimeCreation.LoadSlime(emeraldGordo);
+
+            var rubyGordo = GordoCreation.CreateGordoWithIcon(
+                Ids.RUBY_GORDO,
+                "Ruby Gordo",
+                Identifiable.Id.MOSAIC_GORDO,
+                Ids.RUBY_SLIME,
+                Ids.RUBY_SLIME,
+                "Ruby",
+                ZoneDirector.Zone.QUARRY,
+                "Ruby Gordo",
+                Ids.RUBY_SLIME,
+                35,
+                TextureUtils.LoadImage("RubyGordo.png").CreateSprite()
+            );
+
+            SlimeCreation.LoadSlime(rubyGordo);
 
             List<Identifiable.Id> slimesToLargoWith = new List<Identifiable.Id>
             {
@@ -210,6 +307,10 @@ namespace EmeraldSlime
                 SlimeRegistry.CraftLargo(largoIds2[looper], id, Ids.EMERALD_SLIME, SlimeRegistry.LargoProps.NONE);
                 EatMapCreation.AddLargo(largoIds1[looper], Ids.EMERALD_SLIME, id);
                 EatMapCreation.AddLargo(largoIds2[looper], id, Ids.EMERALD_SLIME);
+                SlimeRegistry.CraftLargo(largoIds1[looper + 18], Ids.RUBY_SLIME, id, SlimeRegistry.LargoProps.NONE);
+                SlimeRegistry.CraftLargo(largoIds2[looper + 18], id, Ids.RUBY_SLIME, SlimeRegistry.LargoProps.NONE);
+                EatMapCreation.AddLargo(largoIds1[looper + 18], Ids.RUBY_SLIME, id);
+                EatMapCreation.AddLargo(largoIds2[looper + 18], id, Ids.RUBY_SLIME);
                 looper++;
             }
 
@@ -335,6 +436,18 @@ namespace EmeraldSlime
             SlimePediaCreation.LoadSlimePediaIcon(Ids.PEDIA_OBSIDIAN_HEN, TextureUtils.LoadImage("ObsidianHen.png").CreateSprite());
             SlimePediaCreation.PreLoadSlimePediaConnection(Ids.PEDIA_OBSIDIAN_CHICK, Ids.OBSIDIAN_CHICK, PediaRegistry.PediaCategory.RESOURCES);
             SlimePediaCreation.PreLoadSlimePediaConnection(Ids.PEDIA_OBSIDIAN_HEN, Ids.OBSIDIAN_HEN, PediaRegistry.PediaCategory.RESOURCES);
+            SlimePediaCreation.LoadSlimePediaIcon(Ids.PEDIA_RUBY_SLIME, TextureUtils.LoadImage("RubySlime.png").CreateSprite());
+            SlimePediaCreation.PreLoadSlimePediaConnection(Ids.PEDIA_RUBY_SLIME, Ids.RUBY_SLIME, PediaRegistry.PediaCategory.SLIMES);
+            SlimePediaCreation.CreateSlimePediaForSlime(
+                Ids.PEDIA_RUBY_SLIME,
+                "Ruby Slimes are dense crystalline slimes formed under intense heat deep underground.",
+                "Stony Hen",
+                "Stony Hen",
+                "Ruby Slimes store thermal energy in their crystalline bodies.",
+                "They grow agitated in crowded corrals due to heat buildup.",
+                "Ruby Plorts are used in high-temperature ranch technology."
+            );
+
 
             SlimePediaCreation.CreateSlimePediaForItemWithName(
                 Ids.PEDIA_OBSIDIAN_CHICK,
@@ -369,13 +482,10 @@ namespace EmeraldSlime
 
             SlimePediaCreation.LoadSlimePediaIcon(Ids.PEDIA_EMERALD_BRINE, TextureUtils.LoadImage("EmeraldBrine.png").CreateSprite());
             SlimePediaCreation.PreLoadSlimePediaConnection(Ids.PEDIA_EMERALD_BRINE, Ids.EMERALD_BRINE, PediaRegistry.PediaCategory.SCIENCE);
-
             SlimePediaCreation.LoadSlimePediaIcon(Ids.PEDIA_RUSTY_CARROT, TextureUtils.LoadImage("RustyCarrot.png").CreateSprite());
-
             SlimePediaCreation.LoadSlimePediaIcon(Ids.PEDIA_EMERALD_SLIME, TextureUtils.LoadImage("EmeraldSlime.png").CreateSprite());
             SlimePediaCreation.PreLoadSlimePediaConnection(Ids.PEDIA_EMERALD_SLIME, Ids.EMERALD_SLIME, PediaRegistry.PediaCategory.SLIMES);
             SlimePediaCreation.PreLoadSlimePediaConnection(Ids.PEDIA_RUSTY_CARROT, Ids.RUSTY_CARROT, PediaRegistry.PediaCategory.RESOURCES);
-
             SlimePediaCreation.CreateSlimePediaForSlime(
                 Ids.PEDIA_EMERALD_SLIME,
                 "Emerald Slimes are crystalline slimes that glow softly as light passes through their gemlike bodies.",
@@ -475,9 +585,9 @@ namespace EmeraldSlime
                 };
 
                 replacer.GetComponent<WorldObjectsCreation>().BuildGordo(
-                    Ids.EMERALD_GORDO,
+                    Ids.RUBY_GORDO,
                     objectsOre,
-                    "EmeraldG1Ore",
+                    "RubyG1Ore",
                     new List<GameObject> { emeraldSlime.Item2 }
                 );
             };

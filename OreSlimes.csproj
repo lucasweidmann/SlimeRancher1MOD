@@ -83,13 +83,26 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="modinfo.json" />
-    <EmbeddedResource Include="*.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="LoadingScreen.png">
+    <EmbeddedResource Include="CrystalPear.png" />
+    <EmbeddedResource Include="CrystalPearColors.png" />
+    <EmbeddedResource Include="EmeraldBrine.png" />
+    <EmbeddedResource Include="EmeraldGordo.png" />
+    <EmbeddedResource Include="EmeraldPlort.png" />
+    <EmbeddedResource Include="EmeraldSlime.png" />
+    <EmbeddedResource Include="LoadingScreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObsidianChick.png" />
+    <EmbeddedResource Include="ObsidianColors.png" />
+    <EmbeddedResource Include="ObsidianHen.png" />
+    <EmbeddedResource Include="RustyCarrot.png" />
+    <EmbeddedResource Include="RustyCarrotColors.png" />
+    <EmbeddedResource Include="RubyGordo.png" />
+    <EmbeddedResource Include="RubyPlort.png" />
+    <EmbeddedResource Include="RubySlime.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
